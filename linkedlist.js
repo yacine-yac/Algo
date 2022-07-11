@@ -24,72 +24,64 @@ function list(head=null){
                     searching.next=nodeElement;
                 } 
                 this.length++;
-              }
-          }
+              } 
+          } 
         };
         this.search=function(element){   
             let prev=this.previous(this.head,element);
-            return prev ===null ? null : prev ==="head" ? "head" : prev.next ;
+            return prev ===null ? null  : prev.next ;
         }
         this.previous=function(obj=this.head,element){
-            if(this.length ===0 || obj.next==null){
+            if(obj===null){   
                return null;
             }else if(this.head.value===element){
                   return "head";
             }else{  
-                 if(obj.next.value == element){
+                  if(obj.next===null){
+                       return null
+                  }else if(obj.next.value == element){
                        return obj;
                  }else{  
                        return this.previous(obj.next,element);  
                  }
             }
         }
-        this.next=function(){
-              
+        this.next=function(element){ 
+            let objectElement=  this.search(element);
+            return objectElement !=null ? objectElement.next : null;
+            
         }
-        
+        this.looping=function(){
 
-    // this.size=function(){ 
-    //     if(this.head != null){
-    //         //let i=this.head;
-    //         let count=0;
-    //         for(i in this.head){
-    //             i=i.next;
-    //             count++;
-    //         }
-    //         return count;
-    //     }else{
-    //         return 0;
-    //     }
-    // };
-    this.Lastnode=function(element){
-        if(element.next ===null){
-            return element;
+        }
+    this.Lastnode=function(list=this.head){
+        if(list.next ===null){
+            return list;
         }else{
-            return this.Lastnode(element.next);
+            
+            return this.Lastnode(list.next);
         }
     };
-    this.firstnode=function(){};
-    this.h=0;
+    this.firstnode=function(){
+        return this.length>0 ? this.head:null;
+    }; 
     this.clear=function(){
-        if(this.h>4){
-          // console.log(this.h,"final");
-        }else{ 
-            this.h++;
-            console.log(this.h,"hhhh"); 
-            yield* this.h;
-            this.clear(); 
-            
+       return this.head=null;
+    }
+    this.delete=function(element){
+       let prev=this.previous(undefined,element);
+       prev ===null ? 
+                     null 
+        :
+                     prev==="head" ?
+                            this.head=this.head.next 
+                     :
+                            prev.next !==null ?
+                                    prev.next=prev.next.next
+                              : 
+                                    prev.next=null;
        
-        }
-        return this.h;
-        
     }
 }
 let a= new list();
-// let j1=new node(1);
-// let j2=new node(2);
-// j1.next=j2;
-
-// let z=new list(j1);
 
