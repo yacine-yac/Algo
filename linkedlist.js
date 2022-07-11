@@ -8,27 +8,34 @@ function list(head=null){
     this.head=head; 
     this.length=0;
     this.insert=function(value,point=null){
-          let nodeElement =new node(value);
-          nodeElement.next=point;
+          let nodeElement =new node(value),searching;
           if(this.head==null){
+            nodeElement.next=point;
             this.head=nodeElement;
             this.length++;
           }else{ 
-              let searching = point===null ? this.Lastnode(this.head) : this.previous(undefined,point);
-              if(searching!==null){
-                 nodeElement.next=searching.next;
-                 searching.next=nodeElement;
-                 this.length++;
+              searching = point===null ? this.Lastnode(this.head) : this.previous(undefined,point);
+              if(searching!==null){ 
+                if(searching ==="head"){
+                    nodeElement.next=this.head;
+                    this.head=nodeElement ;
+                }else{
+                    nodeElement.next=searching.next;
+                    searching.next=nodeElement;
+                } 
+                this.length++;
               }
           }
         };
         this.search=function(element){   
             let prev=this.previous(this.head,element);
-            return prev ===null ? null: prev.next;
+            return prev ===null ? null : prev ==="head" ? "head" : prev.next ;
         }
         this.previous=function(obj=this.head,element){
             if(this.length ===0 || obj.next==null){
                return null;
+            }else if(this.head.value===element){
+                  return "head";
             }else{  
                  if(obj.next.value == element){
                        return obj;
@@ -38,7 +45,7 @@ function list(head=null){
             }
         }
         this.next=function(){
-
+              
         }
         
 
