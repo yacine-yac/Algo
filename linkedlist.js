@@ -6,31 +6,39 @@ function node(value,next=null){
 }
 function list(head=null){
     this.head=head; 
-    this.insert=function(value,point,index=null){
+    this.length=0;
+    this.insert=function(value,point=null){
           let nodeElement =new node(value);
           nodeElement.next=point;
           if(this.head==null){
             this.head=nodeElement;
-          }else{
-              let searching =this.search(undefined,point);
+            this.length++;
+          }else{ 
+              let searching = point===null ? this.Lastnode(this.head) : this.previous(undefined,point);
               if(searching!==null){
                  nodeElement.next=searching.next;
                  searching.next=nodeElement;
-                 console.log("rr",nodeElement);
+                 this.length++;
               }
           }
         };
-        this.search=function(obj=this.head,element){   
-            if(obj.value !==element && obj.next==null){
-                      return null;
+        this.search=function(element){   
+            let prev=this.previous(this.head,element);
+            return prev ===null ? null: prev.next;
+        }
+        this.previous=function(obj=this.head,element){
+            if(this.length ===0 || obj.next==null){
+               return null;
             }else{  
-                if(obj.next.value == element){
-                    return obj;
-                }else{  
-                    return this.search(obj.next,element);  
-                }
+                 if(obj.next.value == element){
+                       return obj;
+                 }else{  
+                       return this.previous(obj.next,element);  
+                 }
             }
-                
+        }
+        this.next=function(){
+
         }
         
 
@@ -47,7 +55,13 @@ function list(head=null){
     //         return 0;
     //     }
     // };
-    this.Lastnode=function(){};
+    this.Lastnode=function(element){
+        if(element.next ===null){
+            return element;
+        }else{
+            return this.Lastnode(element.next);
+        }
+    };
     this.firstnode=function(){};
     this.h=0;
     this.clear=function(){
@@ -65,7 +79,7 @@ function list(head=null){
         
     }
 }
-
+let a= new list();
 // let j1=new node(1);
 // let j2=new node(2);
 // j1.next=j2;
