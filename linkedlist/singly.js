@@ -7,7 +7,7 @@ class node{
     }
     
 }
-class list{
+class List{
     constructor(head=null){
          this.head=head; 
          this.length=0;
@@ -86,5 +86,6 @@ class list{
        
     }
 }
-let a= new list();
+let a= new List();
+export default List;
 
