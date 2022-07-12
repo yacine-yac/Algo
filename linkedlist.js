@@ -1,13 +1,19 @@
 console.log('hello');
 
-function node(value,next=null){
-    this.value=value;
-    this.next=next;
+class node{
+    constructor(value,next=null){
+        this.value=value;
+        this.next=next;
+    }
+    
 }
-function list(head=null){
-    this.head=head; 
-    this.length=0;
-    this.insert=function(value,point=null){
+class list{
+    constructor(head=null){
+         this.head=head; 
+         this.length=0;
+    }
+   
+    insert=function(value,point=null){
           let nodeElement =new node(value),searching;
           if(this.head==null){
             nodeElement.next=point;
@@ -27,11 +33,11 @@ function list(head=null){
               } 
           } 
         };
-        this.search=function(element){   
+    search=function(element){   
             let prev=this.previous(this.head,element);
             return prev ===null ? null  : prev.next ;
         }
-        this.previous=function(obj=this.head,element){
+    previous=function(obj=this.head,element){
             if(obj===null){   
                return null;
             }else if(this.head.value===element){
@@ -46,15 +52,12 @@ function list(head=null){
                  }
             }
         }
-        this.next=function(element){ 
+    next=function(element){ 
             let objectElement=  this.search(element);
             return objectElement !=null ? objectElement.next : null;
             
         }
-        this.looping=function(){
-
-        }
-    this.Lastnode=function(list=this.head){
+    Lastnode=function(list=this.head){
         if(list.next ===null){
             return list;
         }else{
@@ -62,13 +65,13 @@ function list(head=null){
             return this.Lastnode(list.next);
         }
     };
-    this.firstnode=function(){
+    firstnode=function(){
         return this.length>0 ? this.head:null;
     }; 
-    this.clear=function(){
+    clear=function(){
        return this.head=null;
     }
-    this.delete=function(element){
+    delete=function(element){
        let prev=this.previous(undefined,element);
        prev ===null ? 
                      null 
