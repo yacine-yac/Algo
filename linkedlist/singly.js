@@ -1,16 +1,7 @@
-console.log('hello');
-
-class node{
-    constructor(value,next=null){
-        this.value=value;
-        this.next=next;
-    }
-    
-}
+import { node } from "./linkedlist";
 class List{
     constructor(head=null){
-         this.head=head; 
-         this.length=0;
+        super(head);
     }
    
     insert=function(value,point=null){
@@ -87,5 +78,5 @@ class List{
     }
 }
 let a= new List();
-export default List;
+export { List,node};
 
