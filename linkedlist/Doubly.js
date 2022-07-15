@@ -25,11 +25,15 @@ class Dlist extends LinkedList{
     }
    }
    push(element){
-       let Lastnode=this.nodePrevious(null,null);
-       console.log("pushinf",Lastnode);
-      //  if(insert===true)
-      //     return {prev:prev,value:element,next:null};
-
+      /** add node in the end of the list
+       * we check if the   list is empty or no 
+       */
+       let nodeElement= new node(element);
+       let Lastnode=this.nodeLaste();
+       Lastnode !== null ?
+       (nodeElement.prev=Lastnode.value,Lastnode.next=nodeElement) :(nodeElement.prev=null,this.head=nodeElement );
+       this.length++;
+       return nodeElement;  
    }
    pop(element){
       /** this method inset element in the begining of the list 
@@ -39,11 +43,9 @@ class Dlist extends LinkedList{
       nodeElement.prev=null;
       this.head !==null && (this.head.prev=element,nodeElement.next=this.head);
       this.head=nodeElement;
+      this.length++;
       return  this.nodeElement;
-   }
-   search(value){
-       
-   }
+   } 
    nodePrevious(prev=null,point=null,data=this.head){
           /**check value by previous and next by next parameter */ 
       if(this.head!== null){ 
@@ -118,7 +120,7 @@ class Dlist extends LinkedList{
       this.head=null;
    }
    nodeLaste(data=this.head){ // this method make list loop to return the last node of the list
-        return  data.next===null ? data : this.nodeLaste(data.next);
+        return data !==null ?  data.next===null ? data : this.nodeLaste(data.next) : null;
    }
    nodeFirst(){
         return this.head;
@@ -126,10 +128,10 @@ class Dlist extends LinkedList{
 
 }
 let p=new Dlist();
-p.insert(12);
-p.insert(13,12);
-p.insert(5,13);
-p.insert(2,5);
+// p.insert(12);
+// p.insert(13,12);
+// p.insert(5,13);
+// p.insert(2,5);
 
 // && data.value===point
 // console.log(p.insert('yacine',12,5));
@@ -139,10 +141,10 @@ p.insert(2,5);
 // let gig=p.delete(null,12,13);
 // console.log("deleted",gig);
 console.log(p.nodeNext(null,13));
-console.log(p.head,'p instance',p.length);
-console.log('tttttt',p.nodeLaste());
-// p.push(888);
-// console.log('jdsd',p.head,p.length);
+// console.log(p.head,'p instance',p.length);
+// console.log('tttttt',p.nodeLaste());
+// console.log("zzzzzzzzzzzzzzz", p.push(888));
+console.log('jdsd',p.head,p.length);
 // console.log("",p.head);
  //p.insert('malki',12,5);  
 
