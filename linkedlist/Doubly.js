@@ -46,6 +46,19 @@ class Dlist extends LinkedList{
                  return "head";
       }
    }
+   nodeNext(prev,next){
+      /** return next node using the ressources of nodePrevious method and check some situations  */
+      let previousnode=this.nodePrevious(prev,next); 
+       if(previousnode!==null){
+          if(previousnode ==="head"){
+            return this.head.next !== null? this.head.next : {};
+          }else{ 
+            return previousnode.next !==null ? previousnode.next.next!== null ? previousnode.next.next: {} : {}; 
+          }
+       }else{
+           return {};
+       }
+   }
    delete(prev,element,point){
       /** for deleting a node we should have his properties (previous,value,next) 
        * we looking for the previous node of our node that we looking for by nodePrevious method
@@ -99,8 +112,9 @@ p.insert(2,5);
 
 
 // console.log("search",p.nodePrevious(null,13));
-let gig=p.delete(null,12,13);
-console.log("deleted",gig);
+// let gig=p.delete(null,12,13);
+// console.log("deleted",gig);
+console.log(p.nodeNext(null,13));
 console.log(p.head,'p instance',p.length);
 // console.log("",p.head);
  //p.insert('malki',12,5);  
