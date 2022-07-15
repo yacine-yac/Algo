@@ -24,12 +24,13 @@ class Dlist extends LinkedList{
        return  Error('links not exists');
     }
    }
-   // push(prev,element){
-   //     let insert=this.insert(element,prev);
-   //     if(insert===true)
-   //        return {prev:prev,value:element,next:null};
+   push(element){
+       let Lastnode=this.nodePrevious(null,null);
+       console.log("pushinf",Lastnode);
+      //  if(insert===true)
+      //     return {prev:prev,value:element,next:null};
 
-   // }
+   }
    pop(element){
       /** this method inset element in the begining of the list 
        * we need to check if the head is empty or no 
@@ -116,6 +117,13 @@ class Dlist extends LinkedList{
       this.length=0;
       this.head=null;
    }
+   nodeLaste(data=this.head){ // this method make list loop to return the last node of the list
+        return  data.next===null ? data : this.nodeLaste(data.next);
+   }
+   nodeFirst(){
+        return this.head;
+   }
+
 }
 let p=new Dlist();
 p.insert(12);
@@ -132,9 +140,9 @@ p.insert(2,5);
 // console.log("deleted",gig);
 console.log(p.nodeNext(null,13));
 console.log(p.head,'p instance',p.length);
-
-p.pop(888);
-console.log('jdsd',p.head,p.length);
+console.log('tttttt',p.nodeLaste());
+// p.push(888);
+// console.log('jdsd',p.head,p.length);
 // console.log("",p.head);
  //p.insert('malki',12,5);  
 
