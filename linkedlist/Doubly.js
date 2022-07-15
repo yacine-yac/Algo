@@ -70,7 +70,7 @@ class Dlist extends LinkedList{
       let previousnode=this.nodePrevious(prev,next); 
        if(previousnode!==null){
           if(previousnode ==="head"){
-            return this.head.next !== null? this.head.next : {};
+            return this.head!==null ? this.head.next !== null? this.head.next : {} : {};
           }else{ 
             return previousnode.next !==null ? previousnode.next.next!== null ? previousnode.next.next: {} : {}; 
           }
@@ -140,11 +140,11 @@ let p=new Dlist();
 // console.log("search",p.nodePrevious(null,13));
 // let gig=p.delete(null,12,13);
 // console.log("deleted",gig);
-console.log(p.nodeNext(null,13));
+console.log('jdsd',p.head,p.length);console.log(p.nodeNext(null,13));
 // console.log(p.head,'p instance',p.length);
 // console.log('tttttt',p.nodeLaste());
 // console.log("zzzzzzzzzzzzzzz", p.push(888));
-console.log('jdsd',p.head,p.length);
+
 // console.log("",p.head);
  //p.insert('malki',12,5);  
 
