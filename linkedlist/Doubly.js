@@ -24,6 +24,24 @@ class Dlist extends LinkedList{
        return  Error('links not exists');
     }
    }
+   // push(prev,element){
+   //     let insert=this.insert(element,prev);
+   //     if(insert===true)
+   //        return {prev:prev,value:element,next:null};
+
+   // }
+   pop(element){
+      let nodeElement=new node(element); 
+      nodeElement.prev=null;
+      if(this.head !==null ){
+           this.head.prev=element;
+           nodeElement.next=this.head;
+           this.head=nodeElement;
+      }else{ 
+          this.head=nodeElement;
+      }
+      return  this.nodeElement;
+   }
    search(value){
        
    }
@@ -116,6 +134,9 @@ p.insert(2,5);
 // console.log("deleted",gig);
 console.log(p.nodeNext(null,13));
 console.log(p.head,'p instance',p.length);
+
+p.pop(888);
+console.log('jdsd',p.head,p.length);
 // console.log("",p.head);
  //p.insert('malki',12,5);  
 
