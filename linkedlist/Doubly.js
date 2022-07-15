@@ -29,23 +29,61 @@ class Dlist extends LinkedList{
    }
    nodePrevious(prev=null,point=null,data=this.head){
           /**check value by previous and next by next parameter */ 
-      if(this.head!== null){  
-               if(prev===null && data.value===point && data.prev===null){ return "head";}
-               else if(data.next==null && data.value !== prev){ return null;}
-               else if(data.value== prev && (data.next===null ||  data.next.value  == point ) ){ return data;}
-               else{   return  this.nodePrevious(prev,point,data.next);}
+      if(this.head!== null){ 
+               
+               if(prev===null  && data.prev===null){ return "head";}
+               if(data.next!==null){
+                        
+                        if(data.next.next==null && data.value== prev){ return data;}
+                        else if(data.value== prev && data.next.next.value  == point ){  return data;}
+                        else{   return  this.nodePrevious(prev,point,data.next);}
+
+               }else{ 
+                        if(data.value !== prev){ return null;}else{ return data;}
+               }
+               
       }else{  
                  return "head";
       }
    }
    delete(prev,element,point){
-         let nodePrevious=this.nodePrevious(prev,point);
-         console.log(prev,point,'insss',nodePrevious);
-         nodePrevious.next.next.prev=nodePrevious.value;
-         nodePrevious.next=nodePrevious.next.next;
+      /** for deleting a node we should have his properties (previous,value,next) 
+       * we looking for the previous node of our node that we looking for by nodePrevious method
+       * this method return (head, null, node)
+       *  null: that means our node not exists so we can't delete anything  (return empty object)
+       *  head : that means our node if the first node in the list so we delete it ( return the whole head)
+       * node : in this case we check the node value and checking if the node is last one or not (return the deleted node)
+      */
+         let getnode=this.nodePrevious(prev,point);
+         if(getnode!=null){
+               if(getnode==="head"){
+                  this.head =this.head.next;
+                  this.head.prev=null; 
+                  this.length--;
+                  return this.head;  
+               }else{
+                   if(getnode.next.value===element){
+                      if(getnode.next.next!==null){
+                          getnode.next.next.prev=getnode.value;
+                          getnode.next=getnode.next.next;
+                          this.length--;
+                          return {prev:prev,value:element,next:point};   
+                      }else{
+                          getnode.next=null;
+                          this.length--;
+                          return {prev,element,point}
+                      }
 
+                   }else{
+                      return {};
+                   }
+               }
+         }else{  
+            return {};
+         }   
    }
    clear(){
+      /**this method clear the whole node in the list   */
       this.length=0;
       this.head=null;
    }
@@ -56,11 +94,15 @@ p.insert(13,12);
 p.insert(5,13);
 p.insert(2,5);
 
-
+// && data.value===point
 // console.log(p.insert('yacine',12,5));
+
+
+// console.log("search",p.nodePrevious(null,13));
+let gig=p.delete(null,12,13);
+console.log("deleted",gig);
 console.log(p.head,'p instance',p.length);
-p.delete(13,5,2);
-console.log("after",p.head);
+// console.log("",p.head);
  //p.insert('malki',12,5);  
 
  
