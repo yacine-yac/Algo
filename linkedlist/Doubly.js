@@ -31,15 +31,13 @@ class Dlist extends LinkedList{
 
    // }
    pop(element){
+      /** this method inset element in the begining of the list 
+       * we need to check if the head is empty or no 
+       */
       let nodeElement=new node(element); 
       nodeElement.prev=null;
-      if(this.head !==null ){
-           this.head.prev=element;
-           nodeElement.next=this.head;
-           this.head=nodeElement;
-      }else{ 
-          this.head=nodeElement;
-      }
+      this.head !==null && (this.head.prev=element,nodeElement.next=this.head);
+      this.head=nodeElement;
       return  this.nodeElement;
    }
    search(value){
