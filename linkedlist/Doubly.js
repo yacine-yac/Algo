@@ -140,7 +140,7 @@ let p=new Dlist();
 // console.log("search",p.nodePrevious(null,13));
 // let gig=p.delete(null,12,13);
 // console.log("deleted",gig);
-console.log('jdsd',p.head,p.length);console.log(p.nodeNext(null,13));
+// console.log('jdsd',p.head,p.length);console.log(p.nodeNext(null,13));
 // console.log(p.head,'p instance',p.length);
 // console.log('tttttt',p.nodeLaste());
 // console.log("zzzzzzzzzzzzzzz", p.push(888));

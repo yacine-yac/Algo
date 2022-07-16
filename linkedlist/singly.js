@@ -1,10 +1,10 @@
-import { node } from "./linkedlist";
-class List{
+import { node, LinkedList } from "./linkedlist";
+class List extends LinkedList{
     constructor(head=null){
         super(head);
     }
    
-    insert=function(value,point=null){
+    insert(value,point=null){
           let nodeElement =new node(value),searching;
           if(this.head==null){
             nodeElement.next=point;
@@ -24,11 +24,11 @@ class List{
               } 
           } 
         };
-    search=function(element){   
+    search(element){   
             let prev=this.previous(this.head,element);
             return prev ===null ? null  : prev.next ;
         }
-    previous=function(obj=this.head,element){
+    previous(obj=this.head,element){
             if(obj===null){   
                return null;
             }else if(this.head.value===element){
@@ -43,12 +43,12 @@ class List{
                  }
             }
         }
-    next=function(element){ 
+    next(element){ 
             let objectElement=  this.search(element);
             return objectElement !=null ? objectElement.next : null;
             
         }
-    Lastnode=function(list=this.head){
+    Lastnode(list=this.head){
         if(list.next ===null){
             return list;
         }else{
@@ -56,13 +56,13 @@ class List{
             return this.Lastnode(list.next);
         }
     };
-    firstnode=function(){
+    firstnode(){
         return this.length>0 ? this.head:null;
     }; 
-    clear=function(){
+    clear(){
        return this.head=null;
     }
-    delete=function(element){
+    delete(element){
        let prev=this.previous(undefined,element);
        prev ===null ? 
                      null 
