@@ -8,6 +8,12 @@ class Stack{
            this.data++;
            return [value];
     }
+    isEmpty(){  
+        // check if data is empty or no 
+        // empty ==> return true 
+        // not empty ==> false 
+        return  this.length>0 ? false :true;
+     }
 }
 let stack=new Stack();
 console.log(stack);
