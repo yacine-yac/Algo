@@ -68,15 +68,42 @@ class CircularList{
             return {};
         }
     }
+    delete(value){
+     /** this method delete the specific value 
+      * it return the node object deleted 
+      * if the element doesn't exists, it returns an empty object
+      */
+       const searchnode=this.previous(value);
+       let deletednode;
+       if(searchnode==="head"){
+           if(this.head!==null){
+              this.Lastnode().next=this.head.next;
+              deletednode=this.head;
+              this.head=this.head.next;
+              this.length--;  
+           } 
+       }else if(searchnode=== null){
+            deletednode={};
+       }else{
+          deletednode=searchnode.next;
+          if(searchnode.next.next=== this.head){
+                searchnode.next=this.head;
+          }else{
+               searchnode.next=searchnode.next.next;
+          }
+          this.length--;
+       }  
+       return deletednode;
+    } 
 }
 
 let f= new CircularList();
 f.insert(55);
 f.insert(100);
 f.insert(7,55);
-f.insert(88,88);
 // f.insert(200);
 // f.insert(565)
 
 console.log("result",f);
-console.log(f.head); 
+console.log(f.head);
+ f.delete(55);
