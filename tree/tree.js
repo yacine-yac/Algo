@@ -8,14 +8,15 @@ class node{
 
 class Tree{
     constructor(value=null){ 
-        this.root=  value!==null ? new node(value) : null; 
+        // this.root=  value!==null ? new node(value) : null; 
+        this.root=value;
     }
     push(value){  
        /** push node in the end of the tree (as leave) */
          let nodeElement=new node(value,null,null);
          if( this.root === null ) this.root= nodeElement;
          else{
-              let parentNode=this.search(value);  
+              let parentNode=this.search(value);   
               parentNode.value > value ? parentNode.left=nodeElement : parentNode.right = nodeElement;
          }
         return this.root;
@@ -36,7 +37,36 @@ class Tree{
         }
         return data;
     }
-    
+    InOrder(element=this.root){
+    // to traverse tree rule (left--> root--> right)
+          if(this.root!==null){
+            element.left && this.PreOrder(element.left);
+            console.log(element?.value); 
+            element.right && this.PreOrder(element.right);
+          }  
+    }
+    PostOrder(element=this.root){
+      // traverse tree rule (left--> right--> root)
+       if(this.root !==null){
+          element.left  &&  this.PostOrder(element.left);
+          element.right &&  this.PostOrder(element.right);
+          console.log(element.value);
+        }
+    }
+    PreOrder(element=this.root){
+      // traverse tree rule (root--> left-->right)
+        if(this.root!==null){
+            console.log(element.value);
+            element.left  && this.PreOrder(element.left);
+            element.right && this.PreOrder(element.right);
+        }
+    }
 }
 let f=new Tree();
- 
+f.push(9);
+f.push(5);
+f.push(26);
+f.push(2);
+f.push(6);
+let mp=f.PreOrder();
+console.log(mp);
