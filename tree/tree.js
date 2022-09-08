@@ -37,12 +37,12 @@ class Tree{
         }
         return data;
     }
-    InOrder(element=this.root){
+    InOrder(callback=undefined,element=this.root){
     // to traverse tree rule (left--> root--> right)
           if(this.root!==null){
-            element.left && this.PreOrder(element.left);
-            console.log(element?.value); 
-            element.right && this.PreOrder(element.right);
+            element.left && this.InOrder(callback,element.left);
+            callback ? callback(element.value) : console.log(element.value); 
+            element.right && this.InOrder(callback,element.right);
           }  
     }
     PostOrder(element=this.root){
@@ -61,12 +61,53 @@ class Tree{
             element.right && this.PreOrder(element.right);
         }
     }
+    getMin(){
+        // return the lowset node in the tree or null if root tree is null
+       if(this.root!==null){
+          let data=this.root;
+          while (true){
+            if(data.left !==null)  data=data.left;
+            else break;
+          }
+          return data.value;
+       }else{
+         return null;
+       }
+    }
+    getMax(){
+       if(this.root!==null){
+          let data=this.root;
+          while(true){
+            if(data.right!==null )data=data.right;
+            else break;
+          }
+          return data.value;
+       }else{
+         return null;
+       }
+    }
+    getDepth(element){
+      let data=this.root,counter=0;
+        // while(true){
+        //    counter++;
+        //    if(data.left ===element || data.right===element){
+        //        break;
+        //    }else if(data.left==null && data.right==null){
+        //       counter =null;
+        //        break;
+        //    }else{
+        //      data=data.left;
+        //    }
+        // }
+        return counter;
+    }
 }
 let f=new Tree();
 f.push(9);
 f.push(5);
 f.push(26);
 f.push(2);
-f.push(6);
-let mp=f.PreOrder();
-console.log(mp);
+f.push(3);
+let mp=f.InOrder(e=>console.log(e+"my value ="+(e*2)));
+// console.log(mp);
+// console.log(f.getDepth(9));
