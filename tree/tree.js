@@ -16,26 +16,23 @@ class Tree{
          let nodeElement=new node(value,null,null);
          if( this.root === null ) this.root= nodeElement;
          else{
-              let parentNode=this.search(value);   
+              let parentNode=this.getLeave(value);   
               parentNode.value > value ? parentNode.left=nodeElement : parentNode.right = nodeElement;
          }
         return this.root;
     }
-    search(element){
-        // this function traverse tree and return the node which will append the new node
-        let data=this.root;
+    search(element){ 
+        let data=this.root,Depth=-1; 
         while(true){
-             if(data.value<element && data.right ==null){
-                // return data;
-                break;
-             }else if(data.value >element && data.left==null){
-               // return data
-                break;
+            Depth++; 
+            if(data?.value==element){
+                 break;
              }else{
-                 data= data.value > element  ? data.left : data.right;
+               if(data !==null)  data= data.value > element  ? data.left : data.right;
+               else{Depth=-1;  break;}
              }
         }
-        return data;
+        return {nodeSearch:data,Depth};
     }
     InOrder(callback=undefined,element=this.root){
     // to traverse tree rule (left--> root--> right)
@@ -88,19 +85,24 @@ class Tree{
        }
     }
     getDepth(element){
-      let data=this.root,counter=0;
-        // while(true){
-        //    counter++;
-        //    if(data.left ===element || data.right===element){
-        //        break;
-        //    }else if(data.left==null && data.right==null){
-        //       counter =null;
-        //        break;
-        //    }else{
-        //      data=data.left;
-        //    }
-        // }
-        return counter;
+      const {Depth}=this.search(element);
+      console.log('cou',Depth);
+      return Depth;
+    }
+    getLeave(element){
+       // get leave return the last node in the tree branch 
+       // this function traverse tree and return the node which will append the new node
+       let data=this.root; 
+       while(true){ 
+            if(data.value<element && data.right ==null){
+               break;
+            }else if(data.value >element && data.left==null){
+              break;
+            }else{
+                data= data.value > element  ? data.left : data.right;
+            }
+       }
+       return data;
     }
 }
 let f=new Tree();
@@ -109,6 +111,8 @@ f.push(5);
 f.push(26);
 f.push(2);
 f.push(3);
-let mp=f.PostOrder(e=>console.log(e+"my value ="+(e*2)));
+let rc=f.getDepth(266);
+ 
+// let mp=f.PostOrder(e=>console.log(e+"my value ="+(e*2)));
 // console.log(mp);
 // console.log(f.getDepth(9));
