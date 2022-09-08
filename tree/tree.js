@@ -39,26 +39,27 @@ class Tree{
     }
     InOrder(callback=undefined,element=this.root){
     // to traverse tree rule (left--> root--> right)
+    // allow passing a callback function
           if(this.root!==null){
             element.left && this.InOrder(callback,element.left);
             callback ? callback(element.value) : console.log(element.value); 
             element.right && this.InOrder(callback,element.right);
           }  
     }
-    PostOrder(element=this.root){
+    PostOrder(callback=undefined,element=this.root){
       // traverse tree rule (left--> right--> root)
        if(this.root !==null){
-          element.left  &&  this.PostOrder(element.left);
-          element.right &&  this.PostOrder(element.right);
-          console.log(element.value);
+          element.left  &&  this.PostOrder(callback,element.left);
+          element.right &&  this.PostOrder(callback,element.right);
+          callback ? callback(element.value): console.log(element.value);
         }
     }
-    PreOrder(element=this.root){
+    PreOrder(callback=undefined,element=this.root){
       // traverse tree rule (root--> left-->right)
         if(this.root!==null){
-            console.log(element.value);
-            element.left  && this.PreOrder(element.left);
-            element.right && this.PreOrder(element.right);
+            callback ? callback(element.value): console.log(element.value);
+            element.left  && this.PreOrder(callback,element.left);
+            element.right && this.PreOrder(callback,element.right);
         }
     }
     getMin(){
@@ -108,6 +109,6 @@ f.push(5);
 f.push(26);
 f.push(2);
 f.push(3);
-let mp=f.InOrder(e=>console.log(e+"my value ="+(e*2)));
+let mp=f.PostOrder(e=>console.log(e+"my value ="+(e*2)));
 // console.log(mp);
 // console.log(f.getDepth(9));
