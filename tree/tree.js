@@ -54,7 +54,7 @@ class Tree{
     PreOrder(callback=undefined,element=this.root){
       // traverse tree rule (root--> left-->right)
         if(this.root!==null){
-            callback ? callback(element.value): console.log(element.value);
+            callback ? callback(element.value,element): console.log(element.value);
             element.left  && this.PreOrder(callback,element.left);
             element.right && this.PreOrder(callback,element.right);
         }
@@ -86,7 +86,6 @@ class Tree{
     }
     getDepth(element){
       const {Depth}=this.search(element);
-      console.log('cou',Depth);
       return Depth;
     }
     getLeave(element){
@@ -104,15 +103,36 @@ class Tree{
        }
        return data;
     }
+    getTreeHeight(tree=this.root){
+      /** this function return the hight of tree 
+       * we can pass to it a specific sub-tree if no the default tree is the root tree
+       * this method depend on recursion functions (post traverse) left->right->root 
+       * in every level we will return the max highest of the node 
+       *  in the first level (the deepest level) we will check if tree is null so the heighest of the node is the default value(-1) +1 
+       */
+         if(tree==null) return -1;
+         let left_value=this.getTreeHeight(tree.left),
+             right_value= this.getTreeHeight(tree.right);
+         return Math.max(left_value,right_value) +1;
+    }
+    getHight(element){
+     let {nodeSearch}=this.search(element);
+     return nodeSearch !==null ?  this.getTreeHeight(nodeSearch) : null;
+    }
+   
 }
 let f=new Tree();
 f.push(9);
 f.push(5);
 f.push(26);
+f.push(28);
+f.push(25);
 f.push(2);
 f.push(3);
-let rc=f.getDepth(266);
- 
+f.push(1);
+f.push(7);
+let rc=f.getTreeHeight();
+console.log(rc);
 // let mp=f.PostOrder(e=>console.log(e+"my value ="+(e*2)));
 // console.log(mp);
 // console.log(f.getDepth(9));
