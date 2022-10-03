@@ -1,7 +1,7 @@
 function search(array,element){
     let index = 0;
     let result=null;
-    while (index<array.length ){ console.log(index,array[index],"==",element);
+    while (index<array.length ){  
            if(array[index] < element){
                   index += array.length-1-index < 2 ? 1 :  2;
            }
